@@ -3,7 +3,6 @@ import random
 from django.db import models
 
 
-
 CODE_CHOICES = (
     ('R', 'RED'),
     ('G', 'GREEN'),
@@ -66,3 +65,6 @@ class Game(models.Model):
 
     def end_game(self):
         self.finished = True
+    
+    def check_combination(self, combination):
+        return combination == self.code
