@@ -29,3 +29,6 @@ class Game(models.Model):
     finished = models.BooleanField(default=False)
     code = models.CharField(choices=CODE_CHOICES,
                             max_length=4, default=create_code)
+
+    def check_combination(self, combination):
+        return combination == self.code
