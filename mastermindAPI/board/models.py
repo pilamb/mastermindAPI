@@ -38,7 +38,9 @@ class Game(models.Model):
     finished = models.BooleanField(default=False)
     code = models.CharField(choices=CODE_CHOICES,
                             max_length=4, default=create_code)
-
+    player = models.ForeignKey('auth.User',
+                               related_name="games",
+                               on_delete=models.CASCADE)
     class Meta:
         ordering = ('created',)
 

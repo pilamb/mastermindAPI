@@ -46,3 +46,6 @@ class BoardTestCase(TestCase):
     def test_finish_game(self):
         self.game.end_game()
         self.assertIs(self.game.finished, True)
+
+    def test_game_player(self):
+        self.assertIsNotNone(self.game.player)
