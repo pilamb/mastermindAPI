@@ -40,7 +40,6 @@ class Game(models.Model):
     code = models.CharField(choices=CODE_CHOICES,
                             max_length=4, default=create_code)
 
-
     class Meta:
         ordering = ('created',)
 
@@ -64,3 +63,6 @@ class Game(models.Model):
             elif item.upper() in self.code:
                 white_pegs += + 1
         return white_pegs, black_pegs
+
+    def end_game(self):
+        self.finished = True

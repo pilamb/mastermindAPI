@@ -12,6 +12,8 @@ class BoardTestCase(TestCase):
 
     def test_create_game(self):
         self.assertIsNotNone(self.game)
+        self.assertIsNotNone(self.game.code)
+        self.assertIs(self.game.finished, False)
 
     def test_create_code(self):
         with mock.patch("random.choices",
@@ -40,3 +42,7 @@ class BoardTestCase(TestCase):
         self.assertEqual(self.game.check_pegs(combination1), (0,0))
         self.assertEqual(self.game.check_pegs(combination2), (0,3))
         self.assertEqual(self.game.check_pegs(combination3), (0,4))
+
+    def test_finish_game(self):
+        self.game.end_game()
+        self.assertIs(self.game.finished, True)
