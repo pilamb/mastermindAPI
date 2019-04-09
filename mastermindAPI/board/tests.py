@@ -29,6 +29,14 @@ class BoardTestCase(TestCase):
         self.assertEqual(game.check_combination(combination=combination), True)
 
     def test_get_code_display(self):
-        game = Game.objects.create()
-        game.code = ['R', 'G', 'B', 'P']
-        self.assertEqual(decode(game.code), ['RED', 'GREEN', 'BLUE', 'PURPLE'])
+        self.game.code = ['R', 'G', 'B', 'P']
+        self.assertEqual(decode(self.game.code), ['RED', 'GREEN', 'BLUE', 'PURPLE'])
+
+    def test_check_pegs(self):
+        self.game.code = ['R', 'G', 'B', 'P']
+        combination1 = ['A', 'C', 'Z', 'H']
+        combination2 = ['R', 'G', 'Y', 'P']
+        combination3 = ['R', 'G', 'B', 'P']
+        self.assertEqual(self.game.check_pegs(combination1), (0,0))
+        self.assertEqual(self.game.check_pegs(combination2), (0,3))
+        self.assertEqual(self.game.check_pegs(combination3), (0,4))
