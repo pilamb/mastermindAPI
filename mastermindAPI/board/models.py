@@ -2,6 +2,12 @@ import random
 
 from django.db import models
 
+def decode(code):
+    """
+    Like get_code_display's Django but for a tuple.
+    Display human readable color names instead of only a letter.
+    """
+    return [name for i in code for item, name in CODE_CHOICES if item == i]
 
 CODE_CHOICES = (
     ('R', 'RED'),
@@ -32,3 +38,11 @@ class Game(models.Model):
 
     def check_combination(self, combination):
         return combination == self.code
+
+    class Meta:
+        ordering = ('created',)
+
+    @property
+    def get_code_display(self):
+        return decode(self.code)
+

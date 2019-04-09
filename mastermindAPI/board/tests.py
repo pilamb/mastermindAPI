@@ -2,7 +2,7 @@ import mock
 
 from django.test import TestCase
 
-from board.models import Game, create_code
+from board.models import Game, create_code, decode
 
 
 class BoardTestCase(TestCase):
@@ -27,3 +27,8 @@ class BoardTestCase(TestCase):
         game = Game.objects.create()
         game.code = ['R', 'G', 'B', 'P']
         self.assertEqual(game.check_combination(combination=combination), True)
+
+    def test_get_code_display(self):
+        game = Game.objects.create()
+        game.code = ['R', 'G', 'B', 'P']
+        self.assertEqual(decode(game.code), ['RED', 'GREEN', 'BLUE', 'PURPLE'])
