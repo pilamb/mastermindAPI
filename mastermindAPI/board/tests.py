@@ -1,6 +1,7 @@
 import mock
 
 from django.test import TestCase
+from django.contrib.auth.models import User
 
 from board.models import Game, create_code, decode
 
@@ -8,7 +9,8 @@ from board.models import Game, create_code, decode
 class BoardTestCase(TestCase):
 
     def setUp(self):
-        self.game = Game.objects.create()
+        self.player = User.objects.create(username="test")
+        self.game = Game.objects.create(player=self.player)
 
     def test_create_game(self):
         self.assertIsNotNone(self.game)
@@ -26,8 +28,7 @@ class BoardTestCase(TestCase):
 
     def test_check_combination(self):
         combination = ['R', 'G', 'B', 'P']
-        game = Game.objects.create()
-        game.code = ['R', 'G', 'B', 'P']
+        game = Game(code = ['R', 'G', 'B', 'P'])
         self.assertEqual(game.check_combination(combination=combination), True)
 
     def test_get_code_display(self):
@@ -46,3 +47,9 @@ class BoardTestCase(TestCase):
     def test_finish_game(self):
         self.game.end_game()
         self.assertIs(self.game.finished, True)
+
+    def test_game_player(self):
+        self.assertIsNotNone(self.game.player)
+
+    def test_game_owner(self):
+        self.assertEqual(self.game.player.username, self.player.username)
