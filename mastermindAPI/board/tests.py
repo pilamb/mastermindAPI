@@ -70,8 +70,11 @@ class MovementTestCase(TestCase):
 
     def test_movement_representation(self):
         m = Movement.objects.create(result="something", game=self.game)
-        self.assertEqual("{} - {}".format(m.code, m.result), m.__str__())
+        self.assertEqual("{} - {}".format(m.game, m.result), m.__str__())
 
     def test_movement_game_relation(self):
         movement = Movement.objects.create(game=self.game)
         self.assertIsNotNone(movement)
+
+    def test_movement_player(self):
+        self.assertIsNotNone(self.movement.player)

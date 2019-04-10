@@ -77,4 +77,4 @@ class Movement(models.Model):
     result = models.CharField(max_length=100, blank=True)
 
     def __str__(self):
-        return "{} - {}".format(self.code, self.result)
+        return "{} - {}".format(self.game, self.result)
