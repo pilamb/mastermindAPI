@@ -60,16 +60,18 @@ class BoardTestCase(TestCase):
 
 
 class MovementTestCase(TestCase):
+    def setUp(self):
+        self.player = User.objects.create(username="test")
+        self.game = Game.objects.create(player=self.player)
+        self.movement = Movement.objects.create(game=self.game)
 
     def test_create_movement(self):
-        m = Movement.objects.create()
-        self.assertIsNotNone(m)
+        self.assertIsNotNone(self.movement)
 
     def test_movement_representation(self):
-        m = Movement.objects.create(result="something")
+        m = Movement.objects.create(result="something", game=self.game)
         self.assertEqual("{} - {}".format(m.code, m.result), m.__str__())
 
     def test_movement_game_relation(self):
-        game = Game()
-        movement = Movement.objects.create(game=game)
+        movement = Movement.objects.create(game=self.game)
         self.assertIsNotNone(movement)
