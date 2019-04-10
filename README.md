@@ -1,5 +1,12 @@
 # mastermindAPI
 
+
+URLS and usage
+--------------
+- api-auth/ for creating users and log in/out
+- /movements to interact with movements
+- /games to interact with games
+
 Makefile
 --------
 

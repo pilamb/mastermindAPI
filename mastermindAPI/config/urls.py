@@ -2,11 +2,12 @@ from django.urls import include, path
 from rest_framework import routers
 from players.views import UserViewSet
 
-from board.views import MovementView
+from board.views import GameView, MovementView
 
 
 router = routers.DefaultRouter()
 router.register(r'players', UserViewSet)
+router.register(r'games', GameView)
 router.register(r'movements', MovementView)
 
 urlpatterns = [
