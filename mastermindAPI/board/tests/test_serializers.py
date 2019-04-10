@@ -2,11 +2,10 @@ from django.test import TestCase
 from django.contrib.auth.models import User as Player
 
 from board.models import Game, Movement
-from board.serializers import BoardSerializer
+from board.serializers import BoardSerializer, MovementSerializer
 
 
 class GameSerializersTestCase(TestCase):
-
     def setUp(self):
         self.player = Player.objects.create()
         self.game = Game.objects.create(player=self.player)
@@ -25,3 +24,7 @@ class GameSerializersTestCase(TestCase):
         serializer.is_valid()
         self.assertIsNotNone(serializer.data)
         self.assertEqual(serializer.data.get('code'), str(self.game.code))
+
+class MovementSerializer(TestCase):
+    def test_movement_serializer(self):
+        pass
