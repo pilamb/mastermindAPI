@@ -37,7 +37,8 @@ class BoardTestCase(TestCase):
 
     def test_get_code_display(self):
         self.game.code = ['R', 'G', 'B', 'P']
-        self.assertEqual(decode(self.game.code), ['RED', 'GREEN', 'BLUE', 'PURPLE'])
+        self.assertEqual(decode(self.game.code),
+                         ['RED', 'GREEN', 'BLUE', 'PURPLE'])
 
     def test_check_pegs(self):
         self.game.code = ['R', 'G', 'B', 'P']

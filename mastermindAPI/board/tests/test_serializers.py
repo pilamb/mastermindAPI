@@ -25,6 +25,15 @@ class GameSerializersTestCase(TestCase):
         self.assertIsNotNone(serializer.data)
         self.assertEqual(serializer.data.get('code'), str(self.game.code))
 
-class MovementSerializer(TestCase):
-    def test_movement_serializer(self):
-        pass
+
+class MovementSerializerTestCase(TestCase):
+    def setUp(self):
+        self.player = Player.objects.create()
+        self.game = Game.objects.create(player=self.player)
+        self.data = {'game': self.game,
+                     'player': self.player,
+                     'code': str(self.game.code)}
+        self.serializer = MovementSerializer(data=self.data)
+
+    def test_movement_serializer_creation(self):
+        self.assertIsNotNone(self.serializer)
