@@ -19,6 +19,7 @@ def create_code():
     """
     return random.choices([i for i, _ in CODE_CHOICES], k=4)
 
+
 def decode(code):
     """
     Like get_code_display's Django but for a tuple.
@@ -41,6 +42,7 @@ class Game(models.Model):
     player = models.ForeignKey('auth.User',
                                related_name="games",
                                on_delete=models.CASCADE)
+
     class Meta:
         ordering = ('created',)
 
@@ -91,4 +93,3 @@ class Movement(models.Model):
 
     class Meta:
         ordering = ('created',)
-        

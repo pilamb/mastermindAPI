@@ -24,7 +24,7 @@ class PlaySerializer(serializers.ModelSerializer):
         current_game = validated_data.get('game')
         game = Game.objects.select_for_update().get(id=current_game.id)
         code = validated_data.get('code')
-        white_pegs , black_pegs = game.check_pegs(code)
+        white_pegs, black_pegs = game.check_pegs(code)
         turns_count = game.movements.count()
         if black_pegs == MAX_PEGS:
             message = "Congratulations, you have won."
@@ -40,13 +40,13 @@ class PlaySerializer(serializers.ModelSerializer):
             with transaction.atomic():
                 # Avoiding possible malicious operations
                 game.end_game()
-        movement = Movement.objects.create(**validated_data, result=message
-        )
+        movement = Movement.objects.create(**validated_data, result=message)
         return movement
 
     class Meta:
         model = Movement
         fields = ('code', 'player', 'result')
+
 
 class MovementSerializer(serializers.ModelSerializer):
     code = serializers.CharField(source='get_code_display')
@@ -55,7 +55,9 @@ class MovementSerializer(serializers.ModelSerializer):
     game = serializers.HyperlinkedRelatedField(many=False,
                                                read_only=True,
                                                view_name='game-detail')
+
     result = serializers.CharField()
+
     class Meta:
         model = Movement
         fields = ('code', 'player', 'created', 'game', 'result')
