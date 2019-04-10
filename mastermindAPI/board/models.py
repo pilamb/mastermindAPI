@@ -29,9 +29,9 @@ def decode(code):
 
 class Game(models.Model):
     """
-    Represent a board game.
-    Responsible for turn count, generating
-    the colors code, and the game main management
+    CodeMaker: represent the board. Responsible for
+    turn count, getting the colors code
+    and the game main management.
     """
 
     created = models.DateTimeField(auto_now_add=True)
@@ -70,6 +70,10 @@ class Game(models.Model):
 
 
 class Movement(models.Model):
+    """
+    Tracks the Code that a Player attempted When and
+    what Result it received from the Codemaker as feedback.
+    """
     code = models.CharField(max_length=4, blank=True)
     player = models.ForeignKey('auth.User',
                                related_name='player',
@@ -80,4 +84,7 @@ class Movement(models.Model):
     result = models.CharField(max_length=100, blank=True)
 
     def __str__(self):
-        return "{} - {}".format(self.game, self.result)
+        return "{} - {} - {}".format(self.player, self.game, self.result)
+
+    class Meta:
+        ordering = ('created',)
