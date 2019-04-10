@@ -88,3 +88,4 @@ class Movement(models.Model):
 
     class Meta:
         ordering = ('created',)
+        

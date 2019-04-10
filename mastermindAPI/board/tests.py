@@ -32,6 +32,8 @@ class BoardTestCase(TestCase):
         game = Game(code = ['R', 'G', 'B', 'P'])
         self.assertEqual(game.check_combination(combination=combination), True)
         self.assertFalse(game.check_combination(combination2))
+        game = Game(code = ['R', 'G', 'B', 'P'])
+        self.assertEqual(game.check_combination(combination=combination), True)
 
     def test_get_code_display(self):
         self.game.code = ['R', 'G', 'B', 'P']
