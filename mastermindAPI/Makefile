@@ -34,7 +34,7 @@ clean-test-all: clean-test
 	rm -rf .tox/
 
 lint:
-	flake8 wallets clients
+	flake8 board players
 
 test:
 	python manage.py test ${TEST_FLAGS}

@@ -29,10 +29,10 @@ class BoardTestCase(TestCase):
     def test_check_combination(self):
         combination = ['R', 'G', 'B', 'P']
         combination2 = ['R', 'G', 'B', 'Z']
-        game = Game(code = ['R', 'G', 'B', 'P'])
+        game = Game(code=['R', 'G', 'B', 'P'])
         self.assertEqual(game.check_combination(combination=combination), True)
         self.assertFalse(game.check_combination(combination2))
-        game = Game(code = ['R', 'G', 'B', 'P'])
+        game = Game(code=['R', 'G', 'B', 'P'])
         self.assertEqual(game.check_combination(combination=combination), True)
 
     def test_get_code_display(self):
@@ -46,10 +46,10 @@ class BoardTestCase(TestCase):
         combination2 = ['R', 'G', 'Y', 'P']
         combination3 = ['R', 'G', 'B', 'P']
         combination4 = ['A', 'Z', 'C', 'R']
-        self.assertEqual(self.game.check_pegs(combination1), (0,0))
-        self.assertEqual(self.game.check_pegs(combination2), (0,3))
-        self.assertEqual(self.game.check_pegs(combination3), (0,4))
-        self.assertEqual(self.game.check_pegs(combination4), (1,0))
+        self.assertEqual(self.game.check_pegs(combination1), (0, 0))
+        self.assertEqual(self.game.check_pegs(combination2), (0, 3))
+        self.assertEqual(self.game.check_pegs(combination3), (0, 4))
+        self.assertEqual(self.game.check_pegs(combination4), (1, 0))
 
     def test_finish_game(self):
         self.game.end_game()
