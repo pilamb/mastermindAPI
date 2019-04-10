@@ -73,3 +73,6 @@ class Movement(models.Model):
     code = models.CharField(max_length=4, blank=True)
     created = models.DateTimeField(auto_now=True)
     result = models.CharField(max_length=100, blank=True)
+
+    def __str__(self):
+        return "{} - {}".format(self.code, self.result)
