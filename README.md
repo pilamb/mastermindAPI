@@ -1,5 +1,16 @@
 # mastermindAPI
 
+
+URLS and usage
+--------------
+
+- http://127.0.0.1:8000/players/ for user listing and creation
+and python manage.py changepassword <username> to create a password
+- api-auth/ for log in/out
+- /movements to interact with movements
+- /games to interact with games
+
+
 Makefile
 --------
 
