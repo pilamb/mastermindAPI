@@ -17,7 +17,7 @@ def create_code():
     """
     Generate the secret combination.
     """
-    return random.choices([i for i, j in CODE_CHOICES], k=4)
+    return random.choices([i for i, _ in CODE_CHOICES], k=4)
 
 def decode(code):
     """
@@ -37,7 +37,7 @@ class Game(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     finished = models.BooleanField(default=False)
     code = models.CharField(choices=CODE_CHOICES,
-                            max_length=4, default=create_code)
+                            max_length=64, default=create_code)
     player = models.ForeignKey('auth.User',
                                related_name="games",
                                on_delete=models.CASCADE)
@@ -74,7 +74,7 @@ class Movement(models.Model):
     Tracks the Code that a Player attempted When and
     what Result it received from the Codemaker as feedback.
     """
-    code = models.CharField(max_length=4, blank=True)
+    code = models.CharField(max_length=64, blank=True)
     player = models.ForeignKey('auth.User',
                                related_name='player',
                                on_delete=models.PROTECT)
@@ -82,6 +82,9 @@ class Movement(models.Model):
                              on_delete=models.PROTECT)
     created = models.DateTimeField(auto_now=True)
     result = models.CharField(max_length=100, blank=True)
+
+    def get_code_display(self):
+        return decode(self.code)
 
     def __str__(self):
         return "{} - {} - {}".format(self.player, self.game, self.result)
