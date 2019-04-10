@@ -25,6 +25,9 @@ class GameSerializersTestCase(TestCase):
         self.assertIsNotNone(serializer.data)
         self.assertEqual(serializer.data.get('code'), str(self.game.code))
 
+    def test_board_has_movements(self):
+        self.assertTrue('movements' in self.serializer.fields.keys())
+
 
 class MovementSerializerTestCase(TestCase):
     def setUp(self):

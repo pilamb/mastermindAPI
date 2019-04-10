@@ -21,8 +21,8 @@ class BoardSerializer(serializers.ModelSerializer):
     code = serializers.CharField(source='get_code_display')
     player = serializers.ReadOnlyField(source='player.username')
     finished = serializers.ReadOnlyField()
+    movements = MovementSerializer(many=True, read_only=True)
 
     class Meta:
         model = Game
-        fields = ('player', 'created', 'code', 'finished')
-
+        fields = ('player', 'created', 'code', 'finished', 'movements')
