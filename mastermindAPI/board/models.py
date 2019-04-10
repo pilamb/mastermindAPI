@@ -71,6 +71,8 @@ class Game(models.Model):
 
 class Movement(models.Model):
     code = models.CharField(max_length=4, blank=True)
+    game = models.ForeignKey(Game, related_name='movements',
+                             on_delete=models.PROTECT)
     created = models.DateTimeField(auto_now=True)
     result = models.CharField(max_length=100, blank=True)
 
