@@ -58,3 +58,9 @@ class BoardTestCase(TestCase):
     def test_game_owner(self):
         self.assertEqual(self.game.player.username, self.player.username)
 
+
+class MovementTestCase(TestCase):
+
+    def test_create_movement(self):
+        m = Movement.objects.create()
+        self.assertIsNotNone(m)
