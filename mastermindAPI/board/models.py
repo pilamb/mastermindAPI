@@ -67,6 +67,9 @@ class Game(models.Model):
 
     def end_game(self):
         self.finished = True
-    
-    def check_combination(self, combination):
-        return combination == self.code
+
+
+class Movement(models.Model):
+    code = models.CharField(max_length=4, blank=True)
+    created = models.DateTimeField(auto_now=True)
+    result = models.CharField(max_length=100, blank=True)
