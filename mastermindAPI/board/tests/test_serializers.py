@@ -30,6 +30,9 @@ class MovementSerializerTestCase(TestCase):
     def setUp(self):
         self.player = Player.objects.create()
         self.game = Game.objects.create(player=self.player)
+        self.movement = Movement.objects.create(code=str(self.game.code),
+                                                game=self.game,
+                                                player=self.player)
         self.data = {'game': self.game,
                      'player': self.player,
                      'code': str(self.game.code)}
@@ -37,3 +40,13 @@ class MovementSerializerTestCase(TestCase):
 
     def test_movement_serializer_creation(self):
         self.assertIsNotNone(self.serializer)
+
+    def test_serializer_usage(self):
+        serializer = MovementSerializer(instance=self.movement)
+        self.assertEqual(serializer.instance, self.movement)
+
+    def test_serializer_is_valid(self):
+        serializer = MovementSerializer(data=self.data)
+        serializer.is_valid()
+        data = serializer.data
+        self.assertIsNotNone(data)
