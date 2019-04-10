@@ -18,6 +18,10 @@ class GameView(viewsets.ReadOnlyModelViewSet):
         player = self.request.user
         new_game = Game.objects.create(player=player)
         serializer = BoardSerializer(instance=new_game, context=context)
+        Movement.objects.create(game=new_game,
+                                player=player,
+                                result="Creating board \
+                                (this turn doesnt count as a movement.)")
         return Response(serializer.data)
 
 class MovementView(viewsets.ReadOnlyModelViewSet):
