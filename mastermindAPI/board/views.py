@@ -11,7 +11,7 @@ class GameView(viewsets.ReadOnlyModelViewSet):
     queryset = Game.objects.all()
     serializer_class = BoardSerializer
 
-    @action(detail=False, methods=['GET'],
+    @action(detail=False, methods=['GET'], url_name="create",
             permission_classes=(permissions.IsAuthenticated,))
     def create_game(self, request):
         context = {
@@ -26,7 +26,7 @@ class GameView(viewsets.ReadOnlyModelViewSet):
                                 result=creation_message)
         return Response(serializer.data)
 
-    @action(detail=True, methods=['POST'],
+    @action(detail=True, methods=['POST'], url_name="code_guess",
             permission_classes=(permissions.IsAuthenticated,))
     def play(self, request, pk=None):
         try:
