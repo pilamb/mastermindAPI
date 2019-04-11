@@ -13,7 +13,7 @@ class GameView(viewsets.ReadOnlyModelViewSet):
 
     @action(detail=False, methods=['GET'],
             permission_classes=(permissions.IsAuthenticated,))
-    def create_game(self):
+    def create_game(self, request):
         context = {
             "request": self.request,
         }
