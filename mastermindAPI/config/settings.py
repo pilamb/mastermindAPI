@@ -125,3 +125,8 @@ STATIC_URL = '/static/'
 REST_FRAMEWORK = {
     'TEST_REQUEST_DEFAULT_FORMAT': 'json'
 }
+
+# GAME SETTINGS
+
+MAX_PEGS = 4  # how many color pegs are allowed per turn
+MAX_TURNS = 10 # Max number of turns
