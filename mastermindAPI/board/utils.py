@@ -1,10 +1,7 @@
 from board.models import CODE_CHOICES
 
 
-MAX_PEGS = 4
-MAX_TURNS = 10
 COLORS_LIST = [i for _, i in CODE_CHOICES]
-COLORS_ACRONYMS = [i for i, _ in CODE_CHOICES]
 
 
 def validate_input(input_data):
@@ -12,8 +9,7 @@ def validate_input(input_data):
     Check if user color input exists
     """
     for element in input_data:
-        element = element.strip(" ")
-        if element not in COLORS_LIST and element not in COLORS_ACRONYMS:
+        if element.strip(" ") not in COLORS_LIST:
             return False
     return True
 

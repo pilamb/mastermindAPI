@@ -1,9 +1,14 @@
-from rest_framework import serializers
+from django.conf import settings
 from django.db import transaction
+
+from rest_framework import serializers
 
 from .models import Game, Movement
 from .utils import check_quantity, clean_input, \
-                   MAX_PEGS, MAX_TURNS, transform_to_letters, validate_input
+                   transform_to_letters, validate_input
+
+MAX_TURNS = settings.MAX_TURNS
+MAX_PEGS = settings.MAX_PEGS
 
 
 class PlaySerializer(serializers.ModelSerializer):
