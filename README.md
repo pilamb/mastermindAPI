@@ -1,15 +1,18 @@
 # mastermindAPI
 
+Python 3.7 and Django 2.1.7
 
 URLS and usage
 --------------
 
-- http://127.0.0.1:8000/players/ for user listing and creation
-and python manage.py changepassword <username> to create a password
+- http://127.0.0.1:8000/players/ for User listing and creation.
+- python manage.py changepassword <username> to set a password
+
 - api-auth/ for log in/out
 - /movements to interact with movements
-- /games to interact with games
-
+- /games to see played Games with its movements and create new Games by clicking in the "extra actions" button or via API
+- Inside a game that is not finished you can make a Code gues with "extra actions" button or via API
+-
 
 Makefile
 --------
