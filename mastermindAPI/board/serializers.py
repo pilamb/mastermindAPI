@@ -18,6 +18,8 @@ class PlaySerializer(serializers.ModelSerializer):
     result = serializers.ReadOnlyField()
 
     def validate_code(self, value):
+        if not isinstance(value, str):  # detected in test
+            raise serializers.ValidationError("Error in data input.")
         value = clean_input(value)
         if not validate_input(value):
             raise serializers.ValidationError("Wrong color, please try again.")

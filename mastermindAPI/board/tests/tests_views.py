@@ -44,3 +44,7 @@ class BoardViewsTestCase(APITestCase):
         response = view(request)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
+    def test_game_unauthenticated(self):
+        url = reverse('game-create')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
