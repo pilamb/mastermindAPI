@@ -31,21 +31,22 @@ class PlaySerializer(serializers.ModelSerializer):
         code = validated_data.get('code')
         white_pegs, black_pegs = game.check_pegs(code)
         turns_count = game.movements.count()
+        feedback = dict()
         if black_pegs == MAX_PEGS:
-            message = "Congratulations, you have won."
+            result = {'message': "Congratulations, you have won."}
             game_over = True
         elif turns_count == MAX_TURNS:
             # creating a game from the API counts like a movement
-            message = "This was your turn 10: Game Over."
+            result = {'message': "This was your last turn: Game Over."}
             game_over = True
         else:
-            message = "White pegs: {} - Black pegs: {}".format(
-                white_pegs, black_pegs)
+            result = {'white_pegs': white_pegs, 'black_pegs': black_pegs}
         if game_over:
             with transaction.atomic():
                 # Avoiding possible malicious operations
                 game.end_game()
-        movement = Movement.objects.create(**validated_data, result=message)
+        feedback.update(result)
+        movement = Movement.objects.create(**validated_data, result=feedback)
         return movement
 
     class Meta:
