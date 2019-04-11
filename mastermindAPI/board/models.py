@@ -60,8 +60,12 @@ class Game(models.Model):
         """
         white_pegs = 0  # but not a match in the right place
         black_pegs = 0  # right color and in right place
+        code = self.code
+        # chop out unwanted chars, the if is for tests shake.
+        if isinstance(self.code, str):
+            code = eval(''.join(self.code))
         for position, item in enumerate(combination):
-            if item.upper() in self.code and item == self.code[position]:
+            if item.upper() in code and item == code[position]:
                 black_pegs += 1
             elif item.upper() in self.code:
                 white_pegs += + 1
