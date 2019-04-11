@@ -21,14 +21,14 @@ class BoardViewsTestCase(APITestCase):
 
     def test_game_create(self):
         url = reverse('game-create')
-        view = GameView.as_view({'get':'create_game'})
+        view = GameView.as_view({'get': 'create_game'})
         request = self.factory.get(url)
         force_authenticate(request, self.user)
         response = view(request)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertIn('created', response.data)
         self.assertTrue(len(response.data) > 2)
-        self.assertTrue(Game.objects.count()==1)
+        self.assertEqual(Game.objects.count(), 1)
 
     def test_game_detail(self):
         url = reverse('game-create')
@@ -48,5 +48,3 @@ class BoardViewsTestCase(APITestCase):
         url = reverse('game-create')
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
-
-        
