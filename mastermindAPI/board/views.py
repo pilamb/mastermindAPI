@@ -1,4 +1,4 @@
-from rest_framework import status, viewsets
+from rest_framework import permissions, status, viewsets
 from rest_framework.response import Response
 from rest_framework.decorators import action
 
@@ -11,8 +11,9 @@ class GameView(viewsets.ReadOnlyModelViewSet):
     queryset = Game.objects.all()
     serializer_class = BoardSerializer
 
-    @action(detail=False, methods=['get'])
-    def create_game(self, request):
+    @action(detail=False, methods=['GET'],
+            permission_classes=(permissions.IsAuthenticated,))
+    def create_game(self):
         context = {
             "request": self.request,
         }
@@ -25,7 +26,8 @@ class GameView(viewsets.ReadOnlyModelViewSet):
                                 result=creation_message)
         return Response(serializer.data)
 
-    @action(detail=True, methods=['POST'])
+    @action(detail=True, methods=['POST'],
+            permission_classes=(permissions.IsAuthenticated,))
     def play(self, request, pk=None):
         try:
             game = Game.objects.get(id=pk)
@@ -51,3 +53,4 @@ class GameView(viewsets.ReadOnlyModelViewSet):
 class MovementView(viewsets.ReadOnlyModelViewSet):
     queryset = Movement.objects.all()
     serializer_class = MovementSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
