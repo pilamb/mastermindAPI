@@ -73,6 +73,7 @@ class Game(models.Model):
 
     def end_game(self):
         self.finished = True
+        self.save()
 
 
 class Movement(models.Model):
