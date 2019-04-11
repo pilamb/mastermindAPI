@@ -46,7 +46,4 @@ test-coverage: clean-test
 	@-coverage html -i
 	@exit ${exit_code}
 
-test-all:
-	tox
-
 check: clean-build clean-pyc clean-test lint test
