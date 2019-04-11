@@ -18,7 +18,7 @@ class GeneralUserTestCase(TestCase):
         serializer = UserSerializer(all_users, many=True)
         self.assertEqual(len(serializer.instance), 2)
         # auth enabled
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_user_view(self):
         view = UserViewSet
