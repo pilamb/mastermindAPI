@@ -1,14 +1,38 @@
 # mastermindAPI
 
-Python 3.7 and Django 2.1.7
+What?
+-----
 
-URLS and usage
---------------
+This is a DjangoREST API to play [mastermind](https://es.wikipedia.org/wiki/Mastermind) against the machine.
+
+An anonymous user can create Users, and when loged in users can make login and start a game, check his game history including movements.
+The backend will respond with jsons with results like: "you won", "you loose",
+and when in a game "black pegs: int, white pegs: int".
+If a game is finished no more codes can be sent.
+
+Made with Python 3.7 and Django 2.1.7.
+
+
+Quick start
+-----------
+
+0) Use virtualenv to stock this repo or use Docker (see "Docker" below)
+1) Install modules needed:```pip install -r requirements.txt``` or ```make install```
+2) Start the backend: ```python manage.py runserver```
+3) Visit http://127.0.0.1:8000
+
+
+Users management and creation
+-----------------------------
 
 Authentication is required except for Player management:
 
 - http://127.0.0.1:8000/players/ for User creation.
 - python manage.py changepassword <username> to set a password
+
+
+URLs
+----
 
 - api-auth/ for log in/out
 - /movements to interact with movements
@@ -22,14 +46,11 @@ Docker
 docker-compose -f docker-compose.yml build
 docker-compose -f docker-compose.yml up
 
-or:
- - create a virtualenv
- - make pip install -r requirements.txt or make install
 
 Makefile
 --------
 
-Type make command where command can be:
+Type "make command" where command can be:
 
 -	"install - install all requirements"
 -	"clean - remove all artifacts"
