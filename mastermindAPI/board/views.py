@@ -1,9 +1,18 @@
+from django.shortcuts import render
 from rest_framework import permissions, status, viewsets
 from rest_framework.response import Response
 from rest_framework.decorators import action
 
 from board.models import Game, Movement
 from board.serializers import BoardSerializer, PlaySerializer, MovementSerializer
+
+
+def index(request):
+    return render(
+        request,
+        'index.html',
+        context={},
+    )
 
 
 class GameView(viewsets.ReadOnlyModelViewSet):
