@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+			{% load static %}
+      <title>Demo</title>
+	    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+      <meta charset="utf-8" />
+</head>
+
+<body>
+<div id="app">
+  <p>[[ message ]]</p>
+</div>
+<p>VUE PoC</p>
+<div id="app-2">
+  <span v-bind:title="message">
+    Mueva el mouse sobre mí durante unos segundos
+    para ver mi título enlazado dinámicamente.
+  </span>
+</div>
+
+<script type="application/javascript" src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script type="application/javascript" src="{% static "mastermind.js" %}"></script>
+</body>
+
+</html>
