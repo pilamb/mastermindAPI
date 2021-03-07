@@ -4,12 +4,12 @@ from django.db import models
 
 
 CODE_CHOICES = (
-    ('R', 'RED'),
-    ('G', 'GREEN'),
-    ('B', 'BLUE'),
-    ('O', 'ORANGE'),
-    ('P', 'PURPLE'),
-    ('Y', 'YELLOW'),
+    ("R", "RED"),
+    ("G", "GREEN"),
+    ("B", "BLUE"),
+    ("O", "ORANGE"),
+    ("P", "PURPLE"),
+    ("Y", "YELLOW"),
 )
 
 
@@ -37,14 +37,13 @@ class Game(models.Model):
 
     created = models.DateTimeField(auto_now_add=True)
     finished = models.BooleanField(default=False)
-    code = models.CharField(choices=CODE_CHOICES,
-                            max_length=64, default=create_code)
-    player = models.ForeignKey('auth.User',
-                               related_name="games",
-                               on_delete=models.CASCADE)
+    code = models.CharField(choices=CODE_CHOICES, max_length=64, default=create_code)
+    player = models.ForeignKey(
+        "auth.User", related_name="games", on_delete=models.CASCADE
+    )
 
     class Meta:
-        ordering = ('created',)
+        ordering = ("created",)
 
     @property
     def get_code_display(self):
@@ -61,14 +60,14 @@ class Game(models.Model):
         white_pegs = 0  # but not a match in the right place
         black_pegs = 0  # right color and in right place
         code = self.code
-        # chop out unwanted chars, the if is for tests shake.
+        # chop out unwanted chars, the if is for tests sake.
         if isinstance(self.code, str):
-            code = eval(''.join(self.code))
+            code = eval("".join(self.code))
         for position, item in enumerate(combination):
             if item.upper() in code and item == code[position]:
                 black_pegs += 1
             elif item.upper() in self.code:
-                white_pegs += + 1
+                white_pegs += +1
         return white_pegs, black_pegs
 
     def end_game(self):
@@ -81,12 +80,12 @@ class Movement(models.Model):
     Tracks the Code that a Player attempted When and
     what Result it received from the Codemaker as feedback.
     """
+
     code = models.CharField(max_length=64, blank=True)
-    player = models.ForeignKey('auth.User',
-                               related_name='player',
-                               on_delete=models.PROTECT)
-    game = models.ForeignKey(Game, related_name='movements',
-                             on_delete=models.PROTECT)
+    player = models.ForeignKey(
+        "auth.User", related_name="player", on_delete=models.PROTECT
+    )
+    game = models.ForeignKey(Game, related_name="movements", on_delete=models.PROTECT)
     created = models.DateTimeField(auto_now=True)
     result = models.CharField(max_length=100, blank=True)
 
@@ -97,4 +96,4 @@ class Movement(models.Model):
         return "{} - {} - {}".format(self.player, self.game, self.result)
 
     class Meta:
-        ordering = ('created',)
+        ordering = ("created",)

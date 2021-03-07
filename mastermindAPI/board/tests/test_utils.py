@@ -7,10 +7,10 @@ from board.utils import check_quantity, transform_to_letters, validate_input
 
 class UtilsTestCase(TestCase):
     def setUp(self):
-        self.bad_code_1 = [1, 2, 3, 'A']
-        self.bad_code_2 = ['MAGENTA', 'PINK', 'BLACK', 'WHITE']
-        self.bad_length_code = ['BLUE', 'BLUE', 'BLUE', 'BLUE', 'BLUE', 'BLUE']
-        self.ok_code = ['RED', 'GREEN', 'BLUE', 'RED']
+        self.bad_code_1 = [1, 2, 3, "A"]
+        self.bad_code_2 = ["MAGENTA", "PINK", "BLACK", "WHITE"]
+        self.bad_length_code = ["BLUE", "BLUE", "BLUE", "BLUE", "BLUE", "BLUE"]
+        self.ok_code = ["RED", "GREEN", "BLUE", "RED"]
 
     def test_validate_input(self):
         self.assertEqual(validate_input(self.ok_code), True)
@@ -22,5 +22,4 @@ class UtilsTestCase(TestCase):
         self.assertTrue(check_quantity(self.ok_code), settings.MAX_PEGS)
 
     def test_color_translation(self):
-        self.assertEqual(transform_to_letters(self.ok_code),
-                         ['R', 'G', 'B', 'R'])
+        self.assertEqual(transform_to_letters(self.ok_code), ["R", "G", "B", "R"])

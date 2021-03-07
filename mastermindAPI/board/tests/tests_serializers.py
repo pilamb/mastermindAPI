@@ -4,15 +4,14 @@ from django.contrib.auth.models import User as Player
 from rest_framework.exceptions import ValidationError
 
 from board.models import Game, Movement
-from board.serializers import BoardSerializer, PlaySerializer,\
-                              MovementSerializer
+from board.serializers import BoardSerializer, PlaySerializer, MovementSerializer
 
 
 class GameSerializersTestCase(TestCase):
     def setUp(self):
         self.player = Player.objects.create()
         self.game = Game.objects.create(player=self.player)
-        self.data = {'code': str(self.game.code), 'player': self.player}
+        self.data = {"code": str(self.game.code), "player": self.player}
         self.serializer = BoardSerializer(data=self.data)
 
     def test_board_serializer(self):
@@ -26,22 +25,24 @@ class GameSerializersTestCase(TestCase):
         serializer = BoardSerializer(data=self.data)
         serializer.is_valid()
         self.assertIsNotNone(serializer.data)
-        self.assertEqual(serializer.data.get('code'), str(self.game.code))
+        self.assertEqual(serializer.data.get("code"), str(self.game.code))
 
     def test_board_has_movements(self):
-        self.assertTrue('movements' in self.serializer.fields.keys())
+        self.assertTrue("movements" in self.serializer.fields.keys())
 
 
 class MovementSerializerTestCase(TestCase):
     def setUp(self):
         self.player = Player.objects.create()
         self.game = Game.objects.create(player=self.player)
-        self.movement = Movement.objects.create(code=str(self.game.code),
-                                                game=self.game,
-                                                player=self.player)
-        self.data = {'game': self.game,
-                     'player': self.player,
-                     'code': str(self.game.code)}
+        self.movement = Movement.objects.create(
+            code=str(self.game.code), game=self.game, player=self.player
+        )
+        self.data = {
+            "game": self.game,
+            "player": self.player,
+            "code": str(self.game.code),
+        }
         self.serializer = MovementSerializer(data=self.data)
 
     def test_movement_serializer_creation(self):
@@ -62,7 +63,7 @@ class MovementSerializerTestCase(TestCase):
 class PlaySerializerTestCase(TestCase):
     def test_validate_code_input(self):
         value = list()
-        serializer = PlaySerializer(data={'code': value})
+        serializer = PlaySerializer(data={"code": value})
         with self.assertRaises(ValidationError):
             serializer.validate_code(value=value)
 

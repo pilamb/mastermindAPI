@@ -7,22 +7,33 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('board', '0008_movement_player'),
+        ("board", "0008_movement_player"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='movement',
-            options={'ordering': ('created',)},
+            name="movement",
+            options={"ordering": ("created",)},
         ),
         migrations.AlterField(
-            model_name='game',
-            name='code',
-            field=models.CharField(choices=[('R', 'RED'), ('G', 'GREEN'), ('B', 'BLUE'), ('O', 'ORANGE'), ('P', 'PURPLE'), ('Y', 'YELLOW')], default=board.models.create_code, max_length=64),
+            model_name="game",
+            name="code",
+            field=models.CharField(
+                choices=[
+                    ("R", "RED"),
+                    ("G", "GREEN"),
+                    ("B", "BLUE"),
+                    ("O", "ORANGE"),
+                    ("P", "PURPLE"),
+                    ("Y", "YELLOW"),
+                ],
+                default=board.models.create_code,
+                max_length=64,
+            ),
         ),
         migrations.AlterField(
-            model_name='movement',
-            name='code',
+            model_name="movement",
+            name="code",
             field=models.CharField(blank=True, max_length=64),
         ),
     ]

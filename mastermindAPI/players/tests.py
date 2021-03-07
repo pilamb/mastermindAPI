@@ -8,12 +8,12 @@ from players.views import UserViewSet
 
 class GeneralUserTestCase(TestCase):
     def setUp(self):
-        User.objects.create(username='test1')
-        User.objects.create(username='test2')
+        User.objects.create(username="test1")
+        User.objects.create(username="test2")
 
     def test_user_serializer(self):
         client = Client()
-        response = client.get('/players/')
+        response = client.get("/players/")
         all_users = User.objects.all()
         serializer = UserSerializer(all_users, many=True)
         self.assertEqual(len(serializer.instance), 2)
@@ -23,7 +23,9 @@ class GeneralUserTestCase(TestCase):
     def test_user_view(self):
         view = UserViewSet
         query1 = view.queryset.first()
-        query2 = User.objects.filter(is_staff=False,
-                                     is_active=True).order_by(
-                                     '-date_joined').first()
+        query2 = (
+            User.objects.filter(is_staff=False, is_active=True)
+            .order_by("-date_joined")
+            .first()
+        )
         self.assertAlmostEqual(query1, query2)

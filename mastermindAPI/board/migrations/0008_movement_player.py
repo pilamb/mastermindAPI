@@ -9,14 +9,19 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('board', '0007_movement_game'),
+        ("board", "0007_movement_game"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='movement',
-            name='player',
-            field=models.ForeignKey(default=None, on_delete=django.db.models.deletion.PROTECT, related_name='player', to=settings.AUTH_USER_MODEL),
+            model_name="movement",
+            name="player",
+            field=models.ForeignKey(
+                default=None,
+                on_delete=django.db.models.deletion.PROTECT,
+                related_name="player",
+                to=settings.AUTH_USER_MODEL,
+            ),
             preserve_default=False,
         ),
     ]

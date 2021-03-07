@@ -11,8 +11,7 @@ def validate_input(input_data):
     Check if user color input exists
     """
     for element in input_data:
-        if not isinstance(element, str) or \
-           element.strip(" ") not in COLORS_LIST:
+        if not isinstance(element, str) or element.strip(" ") not in COLORS_LIST:
             return False
     return True
 

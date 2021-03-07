@@ -7,14 +7,19 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('board', '0006_movement'),
+        ("board", "0006_movement"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='movement',
-            name='game',
-            field=models.ForeignKey(default=None, on_delete=django.db.models.deletion.PROTECT, related_name='movements', to='board.Game'),
+            model_name="movement",
+            name="game",
+            field=models.ForeignKey(
+                default=None,
+                on_delete=django.db.models.deletion.PROTECT,
+                related_name="movements",
+                to="board.Game",
+            ),
             preserve_default=False,
         ),
     ]

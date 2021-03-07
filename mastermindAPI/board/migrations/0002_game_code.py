@@ -6,13 +6,24 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('board', '0001_initial'),
+        ("board", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='game',
-            name='code',
-            field=models.CharField(choices=[('R', 'RED'), ('G', 'GREEN'), ('B', 'BLUE'), ('O', 'ORANGE'), ('P', 'PURPLE'), ('Y', 'YELLOW')], default=['R', 'G', 'B', 'P'], max_length=4),
+            model_name="game",
+            name="code",
+            field=models.CharField(
+                choices=[
+                    ("R", "RED"),
+                    ("G", "GREEN"),
+                    ("B", "BLUE"),
+                    ("O", "ORANGE"),
+                    ("P", "PURPLE"),
+                    ("Y", "YELLOW"),
+                ],
+                default=["R", "G", "B", "P"],
+                max_length=4,
+            ),
         ),
     ]

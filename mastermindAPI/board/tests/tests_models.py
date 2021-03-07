@@ -7,7 +7,6 @@ from board.models import Game, create_code, decode, Movement
 
 
 class BoardTestCase(TestCase):
-
     def setUp(self):
         self.player = User.objects.create(username="test")
         self.game = Game.objects.create(player=self.player)
@@ -18,34 +17,32 @@ class BoardTestCase(TestCase):
         self.assertIs(self.game.finished, False)
 
     def test_create_code(self):
-        with mock.patch("random.choices",
-                        return_value=['R', 'G', 'B', 'P']):
-            self.assertEqual(create_code(), ['R', 'G', 'B', 'P'])
+        with mock.patch("random.choices", return_value=["R", "G", "B", "P"]):
+            self.assertEqual(create_code(), ["R", "G", "B", "P"])
 
     def test_delete(self):
         self.game.delete()
         self.assertEqual(Game.objects.count(), 0)
 
     def test_check_combination(self):
-        combination = ['R', 'G', 'B', 'P']
-        combination2 = ['R', 'G', 'B', 'Z']
-        game = Game(code=['R', 'G', 'B', 'P'])
+        combination = ["R", "G", "B", "P"]
+        combination2 = ["R", "G", "B", "Z"]
+        game = Game(code=["R", "G", "B", "P"])
         self.assertEqual(game.check_combination(combination=combination), True)
         self.assertFalse(game.check_combination(combination2))
-        game = Game(code=['R', 'G', 'B', 'P'])
+        game = Game(code=["R", "G", "B", "P"])
         self.assertEqual(game.check_combination(combination=combination), True)
 
     def test_get_code_display(self):
-        self.game.code = ['R', 'G', 'B', 'P']
-        self.assertEqual(decode(self.game.code),
-                         ['RED', 'GREEN', 'BLUE', 'PURPLE'])
+        self.game.code = ["R", "G", "B", "P"]
+        self.assertEqual(decode(self.game.code), ["RED", "GREEN", "BLUE", "PURPLE"])
 
     def test_check_pegs(self):
-        self.game.code = ['R', 'G', 'B', 'P']
-        combination1 = ['A', 'C', 'Z', 'H']
-        combination2 = ['R', 'G', 'Y', 'P']
-        combination3 = ['R', 'G', 'B', 'P']
-        combination4 = ['A', 'Z', 'C', 'R']
+        self.game.code = ["R", "G", "B", "P"]
+        combination1 = ["A", "C", "Z", "H"]
+        combination2 = ["R", "G", "Y", "P"]
+        combination3 = ["R", "G", "B", "P"]
+        combination4 = ["A", "Z", "C", "R"]
         self.assertEqual(self.game.check_pegs(combination1), (0, 0))
         self.assertEqual(self.game.check_pegs(combination2), (0, 3))
         self.assertEqual(self.game.check_pegs(combination3), (0, 4))
@@ -66,17 +63,18 @@ class MovementTestCase(TestCase):
     def setUp(self):
         self.player = User.objects.create(username="test")
         self.game = Game.objects.create(player=self.player)
-        self.movement = Movement.objects.create(game=self.game,
-                                                player=self.player)
+        self.movement = Movement.objects.create(game=self.game, player=self.player)
 
     def test_create_movement(self):
         self.assertIsNotNone(self.movement)
 
     def test_movement_representation(self):
-        m = Movement.objects.create(result="something",
-                                    game=self.game, player=self.player)
-        self.assertEqual("{} - {} - {}".format(m.player, self.game, m.result),
-                         m.__str__())
+        m = Movement.objects.create(
+            result="something", game=self.game, player=self.player
+        )
+        self.assertEqual(
+            "{} - {} - {}".format(m.player, self.game, m.result), m.__str__()
+        )
 
     def test_movement_game_relation(self):
         movement = Movement.objects.create(game=self.game, player=self.player)
