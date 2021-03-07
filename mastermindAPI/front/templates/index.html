@@ -14,11 +14,19 @@
 <p>VUE PoC</p>
 <div id="app-2">
   <span v-bind:title="message">
-    Mueva el mouse sobre mí durante unos segundos
-    para ver mi título enlazado dinámicamente.
+    Hover mouse pointer over me for some seconds...
   </span>
 </div>
-
+<div id="app-3">
+  <span v-if="seen">Now you see me</span>
+</div>
+<div id="app-4">
+  <ol>
+    <li v-for="todo in todos">
+      [[ todo.text ]]
+    </li>
+  </ol>
+</div>
 <script type="application/javascript" src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
 <script type="application/javascript" src="{% static "mastermind.js" %}"></script>
 </body>
